@@ -14,10 +14,11 @@
 //     more than 2x off its create price (no chasing a launch that already flew);
 //   - one buy per coin, at most 5 open positions, flat 0.3 SOL stake (capped by
 //     the harness 1%-of-real-reserve order cap, and skipped when that cap is
-//     under the 0.01 SOL round-trip minimum).
+//     under the 0.01 SOL round-trip minimum). In practice the 1% cap binds on
+//     every early buy, so the stake is the cap, not 0.3 SOL.
 //
 // Exit (first trigger wins, whole position, no partials, no adds):
-//   - take profit at +8% over all-in cost;
+//   - take profit at +5% over all-in cost;
 //   - trailing stop: once the position is +1% over cost, sell when it falls 6%
 //     from its best value since entry;
 //   - hold cap of 600 slots;
@@ -47,7 +48,7 @@ const MIN_CROWD_BUYERS = 6; // distinct non-creator buyers before entry
 const MIN_REAL_SOL = 300_000_000n; // 0.3 SOL of real reserve at decision time
 const MAX_REAL_SOL = 30_000_000_000n; // 30 SOL
 const MAX_RUNUP_BPS = 10_000n; // price at most 2x its create price (10_000 bps = 100%)
-const TAKE_PROFIT_BPS = 800; // +8% over all-in cost
+const TAKE_PROFIT_BPS = 500; // +5% over all-in cost
 const TRAIL_ARM_BPS = 100; // trailing stop arms at +1%
 const TRAIL_DROP_BPS = 600; // ... then exits on a 6% fall from the best value
 const HOLD_CAP_SLOTS = 600; // never hold longer than this
